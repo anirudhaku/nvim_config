@@ -17,13 +17,13 @@ local default_on_attach = function(client, bufnr)
     return { buffer = bufnr, desc = desc }
   end
 
-  map("n", "gd", telescope_builtin.lsp_definitions(),
+  map("n", "gd", telescope_builtin.lsp_definitions,
       opts("Show LSP definitions in Telescope"))
-  map("n", "gr", telescope_builtin.lsp_references(),
+  map("n", "gr", telescope_builtin.lsp_references,
       opts("Show LSP references in Telescope"))
-  map("n", "gi", telescope_builtin.lsp_implementations(),
+  map("n", "gi", telescope_builtin.lsp_implementations,
       opts("Show LSP implementations in Telescope"))
-  map("n", "gq", telescope_builtin.diagnostics(),
+  map("n", "gq", telescope_builtin.diagnostics,
       opts("Show LSP diagnostics in Telescope"))
 end
 
