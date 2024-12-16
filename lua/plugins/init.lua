@@ -112,5 +112,5 @@ return {
     opts = {
       debug = true, -- Enable debugging
     },
-  }
+  },
 }
