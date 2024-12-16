@@ -23,7 +23,14 @@ local default_on_attach = function(client, bufnr)
       opts("Show LSP references in Telescope"))
   map("n", "gi", telescope_builtin.lsp_implementations,
       opts("Show LSP implementations in Telescope"))
-  map("n", "gq", telescope_builtin.diagnostics,
+  -- Need to override bufnr with 0. Telescope, oddly, only allows two values for
+  -- bufnr:
+  -- Number 0 - current buffer.
+  -- nil - entire workspace.
+  local telescope_builtin_local_diagnostics = function()
+    telescope_builtin.diagnostics { bufnr = 0, }
+  end
+  map("n", "gq", telescope_builtin_local_diagnostics,
       opts("Show LSP diagnostics in Telescope"))
 end
 
