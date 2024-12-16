@@ -16,7 +16,7 @@ return {
     preserve_window_proportions = false,
     width = {
       min = 20,
-      max = 60,
+      max = 40,
       padding = 0,
     },
   },
