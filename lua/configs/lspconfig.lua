@@ -5,6 +5,7 @@ local lspconfig = require("lspconfig")
 local nv_on_attach = require("nvchad.configs.lspconfig").on_attach
 local nv_on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
+capabilities["offsetEncoding"] = { "utf-16" }
 
 -- default on_attach function to set mappings
 -- note: cannot do this in lua/mappings.lua!!!
@@ -35,19 +36,20 @@ local default_on_attach = function(client, bufnr)
 end
 
 -- add lsps with default config to this list
-local servers = { "bashls" }
+local servers = { "bashls",  "lua_ls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = default_on_attach,
     on_init = nv_on_init,
     capabilities = capabilities,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
 -- clangd
-lspconfig.clangd.setup {
+vim.lsp.config("clangd", {
   on_attach = function(client, bufnr)
     -- not sure why this is needed...
     client.server_capabilities.signatureHelpProvider = false
@@ -55,6 +57,7 @@ lspconfig.clangd.setup {
   end,
   on_init = nv_on_init,
   capabilities = capabilities,
-  cmd = { "clangd", "--log=verbose" },
+  cmd = { "clangd", "-j=2" },
   filetypes = { "cpp" },
-}
+})
+vim.lsp.enable("clangd")

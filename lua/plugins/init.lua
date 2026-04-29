@@ -44,6 +44,9 @@ return {
           "kkharji/sqlite.lua",
         },
       },
+      {
+        "nvim-telescope/telescope-ui-select.nvim",
+      },
     },
     config = function(_, opts)
       local telescope_config = require("configs.telescope")
@@ -99,18 +102,35 @@ return {
   {
     "github/copilot.vim",
     lazy = false,
+    enabled = false,
+  },
+
+  {
+    "zbirenbaum/copilot.lua",
+    dependencies = {
+      "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+    },
+    lazy = false,
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          auto_trigger = true,
+        },
+        nes = {
+          enabled = false,
+        },
+      })
+    end
   },
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     lazy = false,
-    branch = "canary",
     dependencies = {
       { "github/copilot.vim" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
-    opts = {
-      debug = true, -- Enable debugging
-    },
+    opts = require("configs.copilot_chat"),
   },
+
 }

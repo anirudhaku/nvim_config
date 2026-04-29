@@ -3,8 +3,10 @@ return {
   skip_input_prompt = true,
   cscope = {
     picker = "telescope",
-    db_build_cmd_args = {
-      "-bq",
+    db_build_cmd = {
+      args = {
+        "-bq",
+      }
     },
   },
 }

@@ -44,5 +44,6 @@ return {
     local combined_opts = vim.tbl_deep_extend('force', opts, opt_overrides)
     telescope.setup(combined_opts)
     telescope.load_extension("smart_history")
+    telescope.load_extension("ui-select")
   end,
 }
