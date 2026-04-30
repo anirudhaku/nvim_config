@@ -1,7 +1,6 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require("lspconfig")
 local nv_on_attach = require("nvchad.configs.lspconfig").on_attach
 local nv_on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities

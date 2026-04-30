@@ -6,20 +6,23 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("configs.lspconfig")
-    end,
-  },
-
-  {
     "nvim-tree/nvim-tree.lua",
     opts = require("configs.nvim-tree"),
   },
 
   {
-    "williamboman/mason.nvim",
-    opts = require("configs.mason"),
+    "mason-org/mason-lspconfig.nvim",
+    opts = require("configs.mason-lspconfig"),
+    lazy = false,
+    dependencies = {
+      "mason-org/mason.nvim",
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("configs.lspconfig")
+        end,
+      },
+    },
   },
 
   {
@@ -98,39 +101,4 @@ return {
     "windwp/nvim-autopairs",
     enabled = false,
   },
-
-  {
-    "github/copilot.vim",
-    lazy = false,
-    enabled = false,
-  },
-
-  {
-    "zbirenbaum/copilot.lua",
-    dependencies = {
-      "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
-    },
-    lazy = false,
-    config = function()
-      require("copilot").setup({
-        suggestion = {
-          auto_trigger = true,
-        },
-        nes = {
-          enabled = false,
-        },
-      })
-    end
-  },
-
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    lazy = false,
-    dependencies = {
-      { "github/copilot.vim" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    opts = require("configs.copilot_chat"),
-  },
-
 }
