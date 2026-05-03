@@ -18,8 +18,10 @@ unmap({ "n", "t" }, "<A-i>")
 -- Terminal
 local term_map = require("terminal.mappings")
 map({ "n", "x" }, "<leader>ts", term_map.operator_send, { expr = true })
-map("n", "<leader>to", term_map.toggle)
-map("n", "<leader>tO", term_map.toggle({ open_cmd = "enew" }))
-map("n", "<leader>tr", term_map.run)
-map("n", "<leader>tR", term_map.run(nil, { layout = { open_cmd = "enew" } }))
-map("n", "<leader>tx", term_map.kill)
+map("n", "<leader>to", term_map.toggle, { desc = "Terminal toggle terminal" })
+map("n", "<leader>tO", term_map.toggle({ open_cmd = "enew" }),
+  { desc = "Terminal toggle terminal in a new buffer" })
+map("n", "<leader>tr", term_map.run, { desc = "Terminal run a command in a terminal" })
+map("n", "<leader>tR", term_map.run(nil, { layout = { open_cmd = "enew" } }),
+  { desc = "Terminal run a command in a terminal in a new buffer" })
+map("n", "<leader>tx", term_map.kill, { desc = "Terminal kill a terminal" })
