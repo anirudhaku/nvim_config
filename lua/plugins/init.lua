@@ -101,4 +101,12 @@ return {
     "windwp/nvim-autopairs",
     enabled = false,
   },
+
+  {
+    'rebelot/terminal.nvim',
+    config = function()
+      require("terminal").setup(require("configs.terminal"))
+    end,
+    lazy = false,
+  },
 }
