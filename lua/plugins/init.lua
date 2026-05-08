@@ -27,7 +27,10 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = require("configs.nvim-treesitter"),
+    lazy = false,
+    config = function()
+      require("configs.nvim-treesitter").user_setup()
+    end,
   },
 
   {

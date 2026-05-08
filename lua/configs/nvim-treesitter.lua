@@ -1,18 +1,15 @@
-return function()
-  vim.api.nvim_set_hl(0, "@string", { link = "String" })
-  return {
-    ensure_installed = {
-      "lua",
-      "cpp",
-    },
+local M = {}
 
-    highlight = {
-      enable = true,
-      use_languagetree = true,
-    },
+M.user_setup = function()
+  -- setup nvim-treesitter first
+  require("nvim-treesitter").setup({})
 
-    indent = {
-      enable = true,
-    },
-  }
+  require('nvim-treesitter').install({ 'cpp', 'lua' })
+
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'cpp', 'lua' },
+    callback = function() vim.treesitter.start() end,
+  })
 end
+
+return M
