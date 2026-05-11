@@ -15,7 +15,12 @@ return {
     opts = require("configs.mason-lspconfig"),
     lazy = false,
     dependencies = {
-      "mason-org/mason.nvim",
+      {
+        "mason-org/mason.nvim",
+        config = function()
+          require("configs.mason").user_setup()
+        end,
+      },
       {
         "neovim/nvim-lspconfig",
         config = function()
@@ -111,5 +116,14 @@ return {
       require("terminal").setup(require("configs.terminal"))
     end,
     lazy = false,
+  },
+
+  {
+    "hamidi-dev/kaleidosearch.nvim",
+    dependencies = {
+      "tpope/vim-repeat",       -- optional for dot-repeatability
+      "stevearc/dressing.nvim", -- optional for nice input
+    },
+    opts = require("configs.kaleidosearch"),
   },
 }
