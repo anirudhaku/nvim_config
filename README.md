@@ -14,7 +14,7 @@ git clone git@github.com:anirudhaku/nvim_config.git ~/.config/nvim
 
 On first launch, lazy.nvim will bootstrap itself and install all plugins
 (including NvChad). Mason will then install the configured LSP servers
-(`lua_ls`, `clangd`, `bashls`).
+(`lua_ls`, `clangd`, `bashls`) and auto-install `tree-sitter-cli` if missing.
 
 ## Plugins (beyond NvChad defaults)
 
@@ -29,6 +29,7 @@ On first launch, lazy.nvim will bootstrap itself and install all plugins
 | `cscope_maps.nvim` | C/C++ code navigation; lazy-loaded for cpp/cfg/proto/json files |
 | `build_cscope.nvim` | Local plugin; provides `:BuildCscope` to regenerate cscope database |
 | `diffview.nvim` | Git diff and file history viewer |
+| `kaleidosearch.nvim` | Multi-word highlighting with color-coded search terms |
 | `nvim-autopairs` | **Disabled** |
 
 ## LSP servers
@@ -48,14 +49,67 @@ default quickfix list.
 
 Custom bindings on top of NvChad defaults:
 
-| Key | Mode | Action |
-|---|---|---|
-| `;` | Normal | Enter command mode (`:`) |
-| `<leader>fl` | Normal | Live grep across open buffers |
-| `gd` | Normal (LSP) | Telescope LSP definitions |
-| `gr` | Normal (LSP) | Telescope LSP references |
-| `gi` | Normal (LSP) | Telescope LSP implementations |
-| `gq` | Normal (LSP) | Telescope diagnostics (current buffer) |
+| Key | Mode | Action | Defined In |
+|---|---|---|---|
+| `;` | Normal | Enter command mode (`:`) | `mappings.lua` |
+| `<leader>fl` | Normal | Live grep across open buffers | `mappings.lua` |
+| `gd` | Normal (LSP) | Telescope LSP definitions | `configs/lspconfig.lua` |
+| `gr` | Normal (LSP) | Telescope LSP references | `configs/lspconfig.lua` |
+| `gi` | Normal (LSP) | Telescope LSP implementations | `configs/lspconfig.lua` |
+| `gq` | Normal (LSP) | Telescope diagnostics (current buffer) | `configs/lspconfig.lua` |
+
+### Terminal (`terminal.nvim`)
+
+| Key | Mode | Action | Defined In |
+|---|---|---|---|
+| `<leader>ts` | Normal/Visual | Send text to terminal | `configs/terminal.lua` |
+| `<leader>to` | Normal | Toggle terminal | `configs/terminal.lua` |
+| `<leader>tO` | Normal | Toggle terminal in new buffer | `configs/terminal.lua` |
+| `<leader>tr` | Normal | Run command in terminal | `configs/terminal.lua` |
+| `<leader>tR` | Normal | Run command in terminal in new buffer | `configs/terminal.lua` |
+| `<leader>tx` | Normal | Kill terminal | `configs/terminal.lua` |
+
+### Cscope (`cscope_maps.nvim`)
+
+| Key | Mode | Action | Defined In |
+|---|---|---|---|
+| `<leader>cs` | Normal | Find all references to token under cursor | `cscope_maps.nvim` (default) |
+| `<leader>cg` | Normal | Find global definition(s) of token under cursor | `cscope_maps.nvim` (default) |
+| `<leader>cc` | Normal | Find all calls to function name under cursor | `cscope_maps.nvim` (default) |
+| `<leader>ct` | Normal | Find all instances of text under cursor | `cscope_maps.nvim` (default) |
+| `<leader>ce` | Normal | Egrep search for word under cursor | `cscope_maps.nvim` (default) |
+| `<leader>cf` | Normal | Open filename under cursor | `cscope_maps.nvim` (default) |
+| `<leader>ci` | Normal | Find files that include filename under cursor | `cscope_maps.nvim` (default) |
+| `<leader>cd` | Normal | Find functions that function under cursor calls | `cscope_maps.nvim` (default) |
+| `<leader>ca` | Normal | Find places where symbol is assigned a value | `cscope_maps.nvim` (default) |
+| `<leader>cb` | Normal | Build cscope database | `cscope_maps.nvim` (default) |
+| `<C-]>` | Normal | Do `:Cstag <cword>` | `cscope_maps.nvim` (default) |
+
+### Kaleidosearch (`kaleidosearch.nvim`)
+
+| Key | Mode | Action | Defined In |
+|---|---|---|---|
+| `<leader>ss` | Normal | Open search prompt for multi-word highlighting | `configs/kaleidosearch.lua` |
+| `<leader>sc` | Normal | Clear all highlights | `configs/kaleidosearch.lua` |
+| `<leader>sn` | Normal | Add new word to existing highlights | `configs/kaleidosearch.lua` |
+| `<leader>sa` | Normal/Visual | Add word under cursor or visual selection | `configs/kaleidosearch.lua` |
+| `<leader>sw` | Normal | Colorize all vim 'word' tokens | `configs/kaleidosearch.lua` |
+| `<leader>sW` | Normal | Colorize all vim 'WORD' tokens | `configs/kaleidosearch.lua` |
+| `<leader>sl` | Normal | Colorize all lines in buffer | `configs/kaleidosearch.lua` |
+
+### Telescope (`telescope.nvim`)
+
+| Key | Mode | Action | Defined In |
+|---|---|---|---|
+| `<C-Up>` | Normal/Insert | Cycle to previous search in history | `configs/telescope.lua` |
+| `<C-Down>` | Normal/Insert | Cycle to next search in history | `configs/telescope.lua` |
+| `x` | Normal | Delete buffer (in buffer picker) | `configs/telescope.lua` |
+
+### Autocomplete (`nvim-cmp`)
+
+| Key | Mode | Action | Defined In |
+|---|---|---|---|
+| `<C-s>` | Insert | Manually trigger autocomplete | `configs/nvim-cmp.lua` |
 
 ## Local plugin: build_cscope.nvim
 

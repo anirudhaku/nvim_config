@@ -113,7 +113,7 @@ return {
   {
     'rebelot/terminal.nvim',
     config = function()
-      require("terminal").setup(require("configs.terminal"))
+      require("configs.terminal").user_setup()
     end,
     lazy = false,
   },
