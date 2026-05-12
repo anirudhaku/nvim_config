@@ -119,11 +119,10 @@ return {
   },
 
   {
-    "hamidi-dev/kaleidosearch.nvim",
-    dependencies = {
-      "tpope/vim-repeat",       -- optional for dot-repeatability
-      "stevearc/dressing.nvim", -- optional for nice input
-    },
-    opts = require("configs.kaleidosearch"),
+    "taigrr/zoom.nvim",
+    config = function()
+      require("zoom").setup(require("configs.zoom"))
+    end,
+    lazy = false,
   },
 }

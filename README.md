@@ -29,7 +29,7 @@ On first launch, lazy.nvim will bootstrap itself and install all plugins
 | `cscope_maps.nvim` | C/C++ code navigation; lazy-loaded for cpp/cfg/proto/json files |
 | `build_cscope.nvim` | Local plugin; provides `:BuildCscope` to regenerate cscope database |
 | `diffview.nvim` | Git diff and file history viewer |
-| `kaleidosearch.nvim` | Multi-word highlighting with color-coded search terms |
+| `zoom.nvim` | Toggle zoom/maximize for current window |
 | `nvim-autopairs` | **Disabled** |
 
 ## LSP servers
@@ -53,6 +53,7 @@ Custom bindings on top of NvChad defaults:
 |---|---|---|---|
 | `;` | Normal | Enter command mode (`:`) | `mappings.lua` |
 | `<leader>fl` | Normal | Live grep across open buffers | `mappings.lua` |
+| `<leader>z` | Normal | Toggle zoom/maximize current window | `configs/zoom.lua` |
 | `gd` | Normal (LSP) | Telescope LSP definitions | `configs/lspconfig.lua` |
 | `gr` | Normal (LSP) | Telescope LSP references | `configs/lspconfig.lua` |
 | `gi` | Normal (LSP) | Telescope LSP implementations | `configs/lspconfig.lua` |
@@ -84,18 +85,6 @@ Custom bindings on top of NvChad defaults:
 | `<leader>ca` | Normal | Find places where symbol is assigned a value | `cscope_maps.nvim` (default) |
 | `<leader>cb` | Normal | Build cscope database | `cscope_maps.nvim` (default) |
 | `<C-]>` | Normal | Do `:Cstag <cword>` | `cscope_maps.nvim` (default) |
-
-### Kaleidosearch (`kaleidosearch.nvim`)
-
-| Key | Mode | Action | Defined In |
-|---|---|---|---|
-| `<leader>ss` | Normal | Open search prompt for multi-word highlighting | `configs/kaleidosearch.lua` |
-| `<leader>sc` | Normal | Clear all highlights | `configs/kaleidosearch.lua` |
-| `<leader>sn` | Normal | Add new word to existing highlights | `configs/kaleidosearch.lua` |
-| `<leader>sa` | Normal/Visual | Add word under cursor or visual selection | `configs/kaleidosearch.lua` |
-| `<leader>sw` | Normal | Colorize all vim 'word' tokens | `configs/kaleidosearch.lua` |
-| `<leader>sW` | Normal | Colorize all vim 'WORD' tokens | `configs/kaleidosearch.lua` |
-| `<leader>sl` | Normal | Colorize all lines in buffer | `configs/kaleidosearch.lua` |
 
 ### Telescope (`telescope.nvim`)
 
