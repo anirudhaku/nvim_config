@@ -35,7 +35,7 @@ local default_on_attach = function(client, bufnr)
 end
 
 -- add lsps with default config to this list
-local servers = { "bashls",  "lua_ls" }
+local servers = { "bashls",  "lua_ls", "pylsp", "gopls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -60,3 +60,14 @@ vim.lsp.config("clangd", {
   filetypes = { "cpp" },
 })
 vim.lsp.enable("clangd")
+
+-- tinymist
+vim.lsp.config("tinymist", {
+  on_attach = default_on_attach,
+  on_init = nv_on_init,
+  capabilities = capabilities,
+  settings = {
+    exportPdf = "onSave",
+  },
+})
+vim.lsp.enable("tinymist")

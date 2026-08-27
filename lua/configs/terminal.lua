@@ -1,7 +1,11 @@
 local M = {}
 
 local opts = {
-  layout = { open_cmd = "float" },
+  layout = {
+    open_cmd = "float",
+    height = 0.9,
+    width = 0.9,
+  },
   cmd = { vim.o.shell },
   autoclose = false,
 }
