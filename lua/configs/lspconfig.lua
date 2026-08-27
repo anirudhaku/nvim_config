@@ -19,8 +19,9 @@ local default_on_attach = function(client, bufnr)
 
   map("n", "gd", telescope_builtin.lsp_definitions,
       opts("Show LSP definitions in Telescope"))
-  map("n", "gr", telescope_builtin.lsp_references,
-      opts("Show LSP references in Telescope"))
+  map("n", "gr", function()
+        telescope_builtin.lsp_references({ include_current_line = true })
+      end, opts("Show LSP references in Telescope"))
   map("n", "gi", telescope_builtin.lsp_implementations,
       opts("Show LSP implementations in Telescope"))
   -- Need to override bufnr with 0. Telescope, oddly, only allows two values for
