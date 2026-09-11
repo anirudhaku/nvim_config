@@ -5,5 +5,6 @@ return {
     "bashls",
     "tinymist", -- For typst
     "gopls", -- For Go
+    "pylsp", -- For Python
   },
 }

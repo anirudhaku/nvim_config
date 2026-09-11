@@ -31,10 +31,10 @@ LSP keybindings (`gd`, `gr`, `gi`, `gq`) **must** be defined inside the `on_atta
 
 | Plugin | Config file | Notes |
 |---|---|---|
-| `mason-lspconfig` | `configs/mason-lspconfig.lua` | Ensures `lua_ls`, `clangd`, `bashls` installed |
+| `mason-lspconfig` | `configs/mason-lspconfig.lua` | Ensures `lua_ls`, `clangd`, `bashls` installed; lazy-loaded on `ft` for configured LSP filetypes |
 | `nvim-lspconfig` | `configs/lspconfig.lua` | LSP setup; `gd/gr/gi/gq` open in Telescope |
 | `conform.nvim` | `configs/conform.lua` | Formatter; format-on-save is commented out |
-| `nvim-treesitter` | `configs/nvim-treesitter.lua` | Ensures `lua`, `cpp` installed |
+| `nvim-treesitter` | `plugins/init.lua` (`opts`) | Merges with NvChad's defaults; adds `cpp` to `ensure_installed` |
 | `nvim-cmp` | `configs/nvim-cmp.lua` | Autocomplete **disabled** by default; manual trigger: `<C-s>` |
 | `telescope.nvim` | `configs/telescope.lua` | Extended with `smart_history` + `ui-select`; history cycles with `<C-Up>/<C-Down>` |
 | `cscope_maps.nvim` | `configs/cscope_maps.lua` | C/C++ code navigation; lazy-loaded for cpp/cfg/proto/json |

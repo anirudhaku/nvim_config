@@ -13,12 +13,18 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = require("configs.mason-lspconfig"),
-    lazy = false,
+    -- Loads only when opening a filetype with a configured LSP server (see
+    -- `configs/lspconfig.lua`), instead of on every startup. Dependencies
+    -- below load together with this plugin.
+    ft = { "lua", "cpp", "sh", "typst", "go", "python" },
     dependencies = {
       {
         "mason-org/mason.nvim",
-        config = function()
-          require("configs.mason").user_setup()
+        -- Merge with NvChad's own mason `opts` (base46 theming, default
+        -- `ui`/`PATH` settings) instead of replacing them, then apply the
+        -- extra tree-sitter-cli install check on top.
+        config = function(_, opts)
+          require("configs.mason").user_setup(opts)
         end,
       },
       {
@@ -32,9 +38,16 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    config = function()
-      require("configs.nvim-treesitter").user_setup()
+    -- No `lazy`/`event`/`ft` override here: NvChad's own spec for this
+    -- plugin already sets `event = { "BufReadPost", "BufNewFile" }`.
+    --
+    -- Using `opts` (not `config`) so this merges with NvChad's own
+    -- `nvchad.configs.treesitter` opts (base46 theming, default
+    -- `ensure_installed`) instead of replacing them.
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "cpp" })
+      return opts
     end,
   },
 
@@ -102,7 +115,15 @@ return {
 
   {
     "sindrets/diffview.nvim",
-    lazy = false,
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewFileHistory",
+      "DiffviewClose",
+      "DiffviewFocusFiles",
+      "DiffviewToggleFiles",
+      "DiffviewRefresh",
+      "DiffviewLog",
+    },
   },
 
   {
@@ -115,14 +136,15 @@ return {
     config = function()
       require("configs.terminal").user_setup()
     end,
-    lazy = false,
+    keys = require("configs.terminal").lazy_keys(),
   },
 
   {
     "taigrr/zoom.nvim",
+    cmd = { "ZoomToggle", "ZoomRestore" },
+    keys = { { require("configs.zoom").key, desc = "Toggle window zoom" } },
     config = function()
       require("zoom").setup(require("configs.zoom"))
     end,
-    lazy = false,
   },
 }
