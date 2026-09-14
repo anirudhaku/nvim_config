@@ -55,7 +55,9 @@ vim.lsp.config("clangd", {
     client.server_capabilities.signatureHelpProvider = false
     default_on_attach(client, bufnr)
   end,
-  on_init = nv_on_init,
+  -- keep semanticTokensProvider enabled (unlike nv_on_init) to distinguish
+  -- local/member/static/global variables via @lsp.typemod.* highlight groups
+  on_init = nil,
   capabilities = capabilities,
   cmd = { "clangd", "-j=2" },
   filetypes = { "cpp" },
